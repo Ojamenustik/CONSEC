@@ -10,6 +10,8 @@ namespace CONSEC
 {
     class Program
     {
+
+        static StringBuilder wynik = new StringBuilder(1000000);
         static void Main(string[] args)
         {
             int T = int.Parse(Console.ReadLine());
@@ -23,12 +25,15 @@ namespace CONSEC
 
             for(int i = 1; i <= Q; i++)
             {
-                Solution(s);
+                Solution(s, i);
             }
+            Console.WriteLine(wynik.ToString());
         }
 
-        static void Solution(string s)
+        static void Solution(string s, int caseNo)
         {
+
+            wynik.Append($"Case {caseNo}:");
             //wczytaj instrukcje
             string[] tab = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             int[] tabInt = Array.ConvertAll(tab, int.Parse);
@@ -60,7 +65,7 @@ namespace CONSEC
                 }
                 e--;
 
-                Console.WriteLine(e-b+1);
+                wynik.Append($"{e - b + 1}").Append("\n");
             }
             else
             {
