@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+
+namespace CONSEC
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int T = int.Parse(Console.ReadLine());
+            Debug.Assert(T >= 1 && T <= 15);
+
+            string s = Console.ReadLine();
+            Debug.Assert(s.Length >= 1 && s.Length <= 200_000);
+
+            int Q = int.Parse(Console.ReadLine());
+            Debug.Assert(Q >= 1 && T <= 100_000);
+
+            for(int i = 1; i <= Q; i++)
+            {
+                Solution(s);
+            }
+        }
+
+        static void Solution(string s)
+        {
+            //wczytaj instrukcje
+            string[] tab = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            int[] tabInt = Array.ConvertAll(tab, int.Parse);
+            int queryType = tabInt[0];
+            int i = tabInt[1];
+
+
+            StringBuilder sb = new StringBuilder(s);
+
+            //wykonaj i ew.wypisz wynik
+            if (queryType == 2)
+            {
+                //zamien litere na #
+                sb[i] = '#';
+            }
+            else if(queryType == 1)
+            {
+                //oblicz 
+                int b = i;
+                for(b =1; b >= 0; b--)
+                {
+                    if (sb[i] != sb[b]) break;
+                }b++;
+
+                int e = i;
+                for (e = 1; e < sb.Length; e++)
+                {
+                    if (sb[i] != sb[e]) break;
+                }
+                e--;
+
+                Console.WriteLine(e-b+1);
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+    }
+}
